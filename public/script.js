@@ -47,16 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (response.ok) {
-                formMessage.textContent = 'Thank you! Your booking request has been received.';
+                formMessage.textContent = 'Ačiū! Jūsų užklausa buvo gauta.';
                 formMessage.classList.add('msg-success');
                 bookingForm.reset();
             } else {
-                formMessage.textContent = data.error || 'An error occurred. Please try again.';
+                formMessage.textContent = data.error || 'Įvyko klaida. Prašome bandyti dar kartą.';
                 formMessage.classList.add('msg-error');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            formMessage.textContent = 'Network error. Please try again later.';
+            formMessage.textContent = 'Tinklo klaida. Prašome bandyti vėliau.';
             formMessage.classList.add('msg-error');
         } finally {
             // UI State: Reset
