@@ -318,7 +318,6 @@ img {
 /* ===== TESTIMONIALS (AUTO-SCROLL) ===== */
 .testimonials {
     overflow: hidden;
-    /* Hide the scrollbar */
     padding: 100px 0;
 }
 
@@ -326,18 +325,21 @@ img {
     width: 100vw;
     position: relative;
     left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    transform: translateX(-50%);
     overflow: hidden;
-    padding: 20px 0;
+    padding: 40px 0;
+    /* Add fade effect to the edges */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .testimonials-track {
     display: flex;
     gap: 30px;
     width: max-content;
-    animation: scrollTestimonials 35s linear infinite;
+    animation: scrollTestimonials 40s linear infinite;
+    padding: 10px 0;
+    /* extra padding to prevent shadow clipping */
 }
 
 .testimonials-track:hover {
@@ -348,13 +350,15 @@ img {
     background: var(--white);
     padding: 40px;
     border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     position: relative;
     border-top: 4px solid var(--accent-primary);
-    width: 350px;
-    /* Fixed width for consistent scrolling */
+    width: 380px;
+    min-width: 380px;
     flex-shrink: 0;
     white-space: normal;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes scrollTestimonials {
