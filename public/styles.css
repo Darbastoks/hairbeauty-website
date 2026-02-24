@@ -372,14 +372,7 @@ img {
     }
 }
 
-.testimonial-card {
-    background: var(--white);
-    padding: 40px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    position: relative;
-    border-top: 4px solid var(--accent-primary);
-}
+
 
 .stars {
     color: #eab308;
