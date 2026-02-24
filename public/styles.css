@@ -337,7 +337,7 @@ img {
     display: flex;
     gap: 30px;
     width: max-content;
-    animation: scrollTestimonials 35s linear infinite;
+    animation: scrollTestimonials 70s linear infinite;
     padding: 10px 0;
     /* extra padding to prevent shadow clipping */
 }
