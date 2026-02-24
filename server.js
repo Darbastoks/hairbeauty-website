@@ -57,6 +57,35 @@ app.post('/api/book', apiLimiter, async (req, res) => {
     }
 });
 
+// Admin Routes (Simple Authentication)
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'greta123';
+
+app.get('/api/bookings', async (req, res) => {
+    const { password } = req.query;
+    if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ error: 'Neteisingas slaptažodis' });
+    }
+    try {
+        const bookings = await Booking.find().sort({ createdAt: -1 });
+        res.json(bookings);
+    } catch (err) {
+        res.status(500).json({ error: 'Nepavyko užkrauti rezervacijų' });
+    }
+});
+
+app.delete('/api/bookings/:id', async (req, res) => {
+    const { password } = req.query;
+    if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ error: 'Neteisingas slaptažodis' });
+    }
+    try {
+        await Booking.findByIdAndDelete(req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Nepavyko ištrinti rezervacijos' });
+    }
+});
+
 // Handle 404s (fallback to index.html for SPA-like behavior if needed)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
