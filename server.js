@@ -86,6 +86,30 @@ app.delete('/api/bookings/:id', async (req, res) => {
     }
 });
 
+app.put('/api/bookings/:id/status', async (req, res) => {
+    const { password } = req.query;
+    const { status } = req.body;
+
+    if (password !== ADMIN_PASSWORD) {
+        return res.status(401).json({ error: 'Neteisingas slaptažodis' });
+    }
+
+    if (!['pending', 'confirmed', 'completed', 'cancelled'].includes(status)) {
+        return res.status(400).json({ error: 'Neteisingas statusas' });
+    }
+
+    try {
+        const updatedBooking = await Booking.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true }
+        );
+        res.json({ success: true, booking: updatedBooking });
+    } catch (err) {
+        res.status(500).json({ error: 'Nepavyko atnaujinti statuso' });
+    }
+});
+
 // Handle 404s (fallback to index.html for SPA-like behavior if needed)
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
