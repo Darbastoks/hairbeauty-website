@@ -432,6 +432,10 @@ img {
     gap: 12px;
 }
 
+.detail-item p {
+    margin-bottom: 0;
+}
+
 .detail-icon {
     font-size: 1.2rem;
 }
