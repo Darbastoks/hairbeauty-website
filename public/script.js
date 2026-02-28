@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('https://hairbeauty-website.onrender.com/api/book', {
+            const response = await fetch('/api/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
